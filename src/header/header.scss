@@ -1,0 +1,32 @@
+@import '../variables.scss';
+
+.header {
+  width: 100%;
+  background-color: $cl-white;
+  padding: 25px 25px 0 25px;
+
+  &__nav {
+    margin-bottom: 20px;
+  }
+}
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+
+  &__name {
+    max-width: 400px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 32px;
+    font-weight: 900;
+  }
+
+  &__logout {
+    outline: none;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 32px;
+    color: initial;
+  }
+}

@@ -1,0 +1,43 @@
+@import 'variables.scss';
+
+* {
+  box-sizing: border-box;
+}
+  
+html {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.primary-btn {
+  width: 100%;
+  max-width: 320px;
+  height: 48px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  color: $cl-white;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+.primary-btn:disabled {
+  color: $cl-grey;
+}
+.confirm {
+  background-color: $cl-green;
+}
+.reject {
+  background-color: $cl-white;
+  border: 2px solid $cl-red;
+  color: $cl-red;
+}
+.controls {
+  width: 240px;
+  background-color: $cl-black;
+  color: $cl-white;
+  margin-right: 30px;
+}
