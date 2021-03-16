@@ -2,7 +2,6 @@ import React from "react";
 import Button from "../templates/Button";
 
 const Contact = ({ contact, editHandler }) => {
-  console.log(contact);
   return (
     <div className="card">
       <div onClick={() => editHandler(contact.id)} className="card__edit">

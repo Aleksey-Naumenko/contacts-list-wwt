@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+// actions
 import { setContactsList } from "../redux/contacts.actions";
 
 // styles
@@ -11,6 +12,7 @@ import "./contactsPage.scss";
 import Button from "../templates/Button";
 import Popup from "../popup/Popup";
 import Contact from "./Contact";
+import { CSVLink } from "react-csv";
 
 function ContactsPage() {
   const [modalactive, setModalActive] = useState(false);
@@ -18,15 +20,12 @@ function ContactsPage() {
   const contactsList = useSelector((state) => state.contacts.contactsList);
   const [targetContact, setTargetContact] = useState("");
   const [popupTitle, setPopupTitle] = useState("New Contact");
-
   const dispatch = useDispatch();
 
   const targetContactSelector = (id) =>
     contactsList.find((contact) => contact.id === id);
 
   const editBtnHandler = (id) => {
-    debugger;
-    console.log("EDIT TRIGED");
     setPopupTitle("Edit contact");
     const targetContact = targetContactSelector(id);
     setTargetContact(targetContact);
@@ -39,39 +38,37 @@ function ContactsPage() {
   };
 
   const saveBtnHandler = (e, name, phone, id) => {
-    console.log("saveHandler");
-    // delete contact
-    if (!name && !phone) {
-      const newContactsList = contactsList.filter(
-        (contact) => contact.id !== id
-      );
-      dispatch(setContactsList(newContactsList));
-      setModalActive(false);
-      return;
-    }
-    // save contact
+    let newContactsList;
     const targetContact = targetContactSelector(id);
-    if (!targetContact) {
-      const newContactsList = [
+    if (!name && !phone) {
+      // delete contact
+      newContactsList = contactsList.filter((contact) => contact.id !== id);
+      return;
+    } else if (!targetContact) {
+      // save contact
+      newContactsList = [
         ...contactsList,
         { name, phone, id: new Date().toISOString() },
       ];
-      dispatch(setContactsList(newContactsList));
-      setModalActive(false);
-      return;
+    } else {
+      // edit contact
+      newContactsList = contactsList.map((contact) => {
+        console.log(contact.id, id);
+        if (contact.id === id) {
+          contact.name = name;
+          contact.phone = phone;
+        }
+        return contact;
+      });
     }
-    // edit contact
-    const newContactsList = contactsList.map((contact) => {
-      console.log(contact.id, id);
-      if (contact.id === id) {
-        contact.name = name;
-        contact.phone = phone;
-      }
-      return contact;
-    });
     dispatch(setContactsList(newContactsList));
     setModalActive(false);
   };
+
+  const csvHeaders = [
+    { label: "Name", key: "name" },
+    { label: "Phone Number", key: "phone" },
+  ];
 
   console.log(contactsList);
   return (
@@ -90,9 +87,13 @@ function ContactsPage() {
               >
                 New Contact
               </Button>
-              <Button callBack={null} type="button" styles="controls">
+              <CSVLink
+                data={contactsList}
+                headers={csvHeaders}
+                className="primary-btn controls csv-btn"
+              >
                 Download CSV
-              </Button>
+              </CSVLink>
             </div>
             <div className="container__cards">
               {contactsList

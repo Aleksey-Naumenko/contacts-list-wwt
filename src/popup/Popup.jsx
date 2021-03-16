@@ -11,20 +11,6 @@ const Popup = ({ active, setActive, title, contact, saveHandler }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
-  // useEffect(() => {
-  //   if (title === "New Contact") {
-  //     setName("");
-  //     setPhone("");
-  //     setId("");
-  //   }
-  // }, [title]);
-
-  // useEffect(() => {
-  //   setName(contact.name);
-  //   setPhone(contact.phone);
-  //   setId(contact.id);
-  // }, [contact]);
-
   useEffect(() => {
     if (active === true) {
       setName(contact.name);
@@ -68,7 +54,6 @@ const Popup = ({ active, setActive, title, contact, saveHandler }) => {
               className="login-form__input"
             />
             <Button
-              isDisabled={false}
               callBack={(e) => saveHandler(e, name, phone, id)}
               type="button"
               styles="confirm"
@@ -76,7 +61,6 @@ const Popup = ({ active, setActive, title, contact, saveHandler }) => {
               Save
             </Button>
             <Button
-              isDisabled={false}
               callBack={() => setActive(false)}
               type="button"
               styles="reject"

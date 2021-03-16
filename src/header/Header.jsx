@@ -5,8 +5,6 @@ import { setLoggedInUserAction } from "../redux/contacts.actions";
 
 // styles
 import "./header.scss";
-// components
-import Button from "../templates/Button";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -32,24 +30,6 @@ const Header = () => {
               Logout
             </Link>
           </div>
-          {/* <div className="header__controls">
-            <Button
-              isDisabled={false}
-              callBack={null}
-              type="button"
-              styles="controls"
-            >
-              New Contact
-            </Button>
-            <Button
-              isDisabled={false}
-              callBack={null}
-              type="button"
-              styles="controls"
-            >
-              Download CSV
-            </Button>
-          </div> */}
         </header>
       )}
     </>
