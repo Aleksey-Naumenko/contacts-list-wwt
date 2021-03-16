@@ -1,5 +1,5 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 // actions
@@ -12,15 +12,8 @@ import "./login.scss";
 import Button from "../templates/Button";
 
 const LoginPage = () => {
-  console.log("LOGIN PAGE RENDERED");
-  let isLoggedIn = useSelector((state) => state.contacts.isLoggedIn);
   const dispatch = useDispatch();
   const history = useHistory();
-  // let isLoggedIn;
-  // localStorage.getItem("isLoggedIn") === "true"
-  //   ? (isLoggedIn = true)
-  //   : (isLoggedIn = false);
-
   const [name, setName] = useState("");
 
   const inputChangeHandler = (e) => {
@@ -45,15 +38,6 @@ const LoginPage = () => {
           type="text"
           className="login-form__input"
         />
-
-        {/* <Button type="img" styles="confirm" number="099 999 99 99">
-          <img src="../images/phone.svg" alt="phone" />
-        </Button> */}
-
-        {/* <Button callBack={callBack} type="button" styles="reject">
-          Close
-        </Button> */}
-
         <Button
           isDisabled={!name}
           callBack={submitHandler}
